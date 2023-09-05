@@ -4,6 +4,7 @@ import { fetchImages } from './fetch'
 const button = document.querySelector('[type="submit"]')
 const inputField = document.querySelector('[name="searchQuery"]')
 
+
 button.addEventListener('click', chosenGallery)
 
 function chosenGallery () {
