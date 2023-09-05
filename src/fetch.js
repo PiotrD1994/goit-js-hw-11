@@ -4,7 +4,7 @@ import 'notiflix/dist/notiflix-3.2.6.min.css';
 
 
 export async function fetchImages(inputValue) {
-    const searchQuery = inputValue.value.trim()
+    const searchQuery = inputValue.trim()
     if (searchQuery ==='') {
         Notiflix.Notify.failure('Please, enter key word')
         return
