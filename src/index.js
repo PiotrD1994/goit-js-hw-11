@@ -1,5 +1,8 @@
 import Notiflix from 'notiflix'
 import { fetchImages } from './fetch'
+import simpleLightbox from 'simplelightbox'
+import 'simplelightbox/dist/simple-lightbox.min.css'
+import 'notiflix/dist/notiflix-3.2.6.min.css';
 
 const button = document.querySelector('[type="submit"]')
 const inputField = document.querySelector('[name="searchQuery"]')
@@ -46,7 +49,9 @@ function fetchAndShowImages(query, append = false) {
       totalHits = data.totalHits
       const markup = data.hits.map(image => `
       <div class="photo-card">
-        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" />
+      <a href="${image.largeImageURL}" class="gallery-link">
+        <img src="${image.webformatURL}" alt="${image.tags}" loading="lazy" class="gallery-image" />
+        </a>
         <div class="info">
         <p class="info-item">
         <b>Lubię to: ${image.likes}</b>
@@ -66,6 +71,14 @@ function fetchAndShowImages(query, append = false) {
             gallery.innerHTML += markup
         } else {
             gallery.innerHTML = markup
+            const { height: cardHeight } = document
+            .querySelector(".gallery")
+            .firstElementChild.getBoundingClientRect();
+
+            window.scrollBy({
+            top: cardHeight * 2,
+             behavior: "smooth",
+              });
             Notiflix.Notify.success(`Hooray! We found ${totalHits} images.`)
         }
         if (page * limit >= totalHits) {
@@ -76,5 +89,15 @@ function fetchAndShowImages(query, append = false) {
 }).catch(error => {
     Notiflix.Notify.failure('Error during images downloading', {clickToClose: true})
 })}
+
+
+const lightbox = new simpleLightbox('.gallery-link', {
+        captionData: 'alt',
+        captionDelay: 250,
+        captionPosition:"bottom",
+        enableKeyboard: true,
+})
+lightbox.refresh()
+
 
 
