@@ -86,18 +86,19 @@ function fetchAndShowImages(query, append = false) {
         } else {
             loadBtn.style.display = 'block'
         }
+        lightbox.refresh()
 }).catch(error => {
     Notiflix.Notify.failure('Error during images downloading', {clickToClose: true})
 })}
 
 
 const lightbox = new simpleLightbox('.gallery-link', {
-        captionData: 'alt',
+        captionsData: 'alt',
         captionDelay: 250,
         captionPosition:"bottom",
         enableKeyboard: true,
 })
-lightbox.refresh()
+
 
 
 
