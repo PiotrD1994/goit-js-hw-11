@@ -35,7 +35,7 @@ loadBtn.addEventListener('click', function() {
 })
 
 function fetchAndShowImages(query, append = false) {
-    fetchImages(query, page, limit)
+    fetchImages(query, page = 1)
     .then(data => {
         if (!data.hits.length) {
             if(page === 1) {

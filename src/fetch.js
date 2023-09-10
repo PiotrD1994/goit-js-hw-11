@@ -3,11 +3,11 @@ import Notiflix from 'notiflix';
 import 'notiflix/dist/notiflix-3.2.6.min.css';
 
 
-export async function fetchImages(inputValue) {
-    const searchQuery = inputValue.trim()
+export async function fetchImages(query, page = 1) {
+    const searchQuery = query.trim()
     if (searchQuery ==='') {
         Notiflix.Notify.failure('Please, enter key word')
-        return
+        return null
     }
     const searchParams = new URLSearchParams({
         key: "39267664-2bc18c2ff9f132c4867ec917a",
@@ -15,7 +15,6 @@ export async function fetchImages(inputValue) {
         image_type: "photo",
         orientation: "horizontal",
         safesearch: "true",
-        page: 1,
         per_page: 40, 
     })
     try {
